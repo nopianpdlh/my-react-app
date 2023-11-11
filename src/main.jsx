@@ -8,6 +8,10 @@ import ErrorPage from "./Pages/404";
 import Products from "./Pages/products";
 import ProfilePage from "./Pages/profile.jsx";
 import DetailProductPage from "./Pages/detailProduct.jsx";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import DarkModeContextProvider from "./context/DarkMode.jsx";
+import { TotalPriceProvider } from "./context/TotalPrice.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +43,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <DarkModeContextProvider>
+        <TotalPriceProvider>
+          <RouterProvider router={router} />
+        </TotalPriceProvider>
+      </DarkModeContextProvider>
+    </Provider>
   </React.StrictMode>
 );
